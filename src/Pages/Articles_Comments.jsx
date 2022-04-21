@@ -43,8 +43,6 @@ const Articles = () => {
           <p>{article.created_at}</p>
           <p>{article.votes}</p>
           <p>END OF ARTICLE REFERENCE FOR ME ONLY TO SPLIT THIS SHIT UP </p>
-          {/* <input type="text">Add your comment here dude</input>
-          <button>Aight submit here</button> */}
         </div>
       </div>
 

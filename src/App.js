@@ -19,7 +19,7 @@ function App() {
           path="api/articles/:article_id/comments"
           element={<Articles_Comments />}
         />
-        <Route path="/topics" element={<Topics />} />
+        <Route path="api/articles/:topics" element={<Topics />} />
         <Route path="/users" element={<Users />} />
       </Routes>
     </div>
