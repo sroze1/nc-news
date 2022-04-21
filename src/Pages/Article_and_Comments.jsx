@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-const Articles = () => {
+const Article_and_Comments = () => {
   const [article, setArticle] = useState([]);
   const [comments, setComments] = useState([]);
   const params = useParams();
@@ -37,7 +37,7 @@ const Articles = () => {
       <div className="body">
         <div className="article">
           <p>{article.title}</p>
-          <p>{article.topic}</p>
+          <Link to={`/api/articles/${article.topic}`}>#{article.topic}</Link>
           <p>{article.body}</p>
           <p>@{article.author}</p>
           <p>{article.created_at}</p>
@@ -51,7 +51,7 @@ const Articles = () => {
           return (
             <div>
               {" "}
-              <p>{comment.author}</p>
+              <p>@{comment.author} commented:</p>
               <p>{comment.body}</p>
               <p>{comment.created_at}</p>
               <button id="votes">{comment.votes}</button>
@@ -64,4 +64,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default Article_and_Comments;
