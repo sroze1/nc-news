@@ -21,14 +21,16 @@ const Articles = () => {
         return (
           <div className="article" key={item.article_id}>
             <header>
-              {/* <h2>
+
+               <h2>
                 <Link
                   to={`/api/articles/${item.article_id}/article_and_comments`}
                 >
                   {item.title}
                 </Link>
               </h2>
-              <Link to={`/api/articles/${item.topic}`}>#{item.topic}</Link> */}
+              <Link to={`/api/articles/${item.topic}`}>#{item.topic}</Link>
+
             </header>
 
             <div className="body">
