@@ -21,16 +21,12 @@ const Articles = () => {
         return (
           <div className="article" key={item.article_id}>
             <header>
-
-               <h2>
-                <Link
-                  to={`/api/articles/${item.article_id}/article_and_comments`}
-                >
+              <h2>
+                <Link to={`/articles/${item.article_id}/article_and_comments`}>
                   {item.title}
                 </Link>
               </h2>
-              <Link to={`/api/articles/${item.topic}`}>#{item.topic}</Link>
-
+              <Link to={`/articles/${item.topic}`}>#{item.topic}</Link>
             </header>
 
             <div className="body">
@@ -38,9 +34,7 @@ const Articles = () => {
               <div>
                 {" "}
                 <p>@{item.author}</p>
-                <Link
-                  to={`/api/articles/${item.article_id}/article_and_comments`}
-                >
+                <Link to={`/articles/${item.article_id}/article_and_comments`}>
                   Comments: {item.comment_count}
                 </Link>
                 <button id="votes">{item.votes}</button>

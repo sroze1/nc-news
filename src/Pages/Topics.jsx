@@ -32,14 +32,11 @@ const Topics = () => {
   return (
     <div>
       <h1>Topic: {params.topic}</h1>
-      {console.log(articles)}
+
       <h2>{articles.comment_count}</h2>
       {articles.map((item) => {
-        {
-          console.log(item, "new new");
-        }
         return (
-          <div>
+          <div key={articles.article_id}>
             <header>
               <h2>{item.title}</h2>
             </header>
@@ -49,7 +46,7 @@ const Topics = () => {
               <div>
                 {" "}
                 <p>@{item.author}</p>
-                <Link to={`/articles/${item.article_id}/comments`}>
+                <Link to={`/articles/${item.article_id}/article_and_comments`}>
                   Comments: {item.comment_count}
                 </Link>
                 <button id="votes">{item.votes}</button>

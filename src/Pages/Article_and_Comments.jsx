@@ -35,7 +35,7 @@ const Article_and_Comments = () => {
       <div className="body">
         <div className="article">
           <p>{article.title}</p>
-          <Link to={`/api/articles/${article.topic}`}>#{article.topic}</Link>
+          <Link to={`/articles/${article.topic}`}>#{article.topic}</Link>
           <p>{article.body}</p>
           <p>@{article.author}</p>
           <p>{article.created_at}</p>

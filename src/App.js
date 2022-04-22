@@ -16,7 +16,7 @@ function App() {
         <Route path="/api" element={<Main />} />
         <Route path="/articles" element={<Articles />} />
         <Route
-          path="api/articles/:article_id/article_and_comments"
+          path="/articles/:article_id/article_and_comments"
           element={<Article_and_Comments />}
         />
         <Route path="/articles/:topic" element={<Topics />} />
