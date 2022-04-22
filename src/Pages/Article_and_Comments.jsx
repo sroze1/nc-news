@@ -7,28 +7,26 @@ const Article_and_Comments = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch(
-      `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((newArticle) => {
-        setArticle(newArticle.results);
-      });
-  }, [params.article_id]);
-
-  // Display the article with the comments
-  useEffect(() => {
-    fetch(
-      `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}/comments`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((newComments) => {
-        setComments(newComments.comments);
-      });
+    Promise.all([
+      fetch(
+        `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((newArticle, newComments) => {
+          setArticle(newArticle.results);
+        }),
+      fetch(
+        `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}/comments`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((newComments) => {
+          setComments(newComments.comments);
+        }),
+    ]);
   }, [params.article_id]);
 
   return (
@@ -49,7 +47,7 @@ const Article_and_Comments = () => {
       <div className="comments">
         {comments.map((comment) => {
           return (
-            <div>
+            <div key={comment.comment_id}>
               {" "}
               <p>@{comment.author} commented:</p>
               <p>{comment.body}</p>
