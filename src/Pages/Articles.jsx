@@ -22,7 +22,7 @@ const Articles = () => {
           <div className="article" key={item.article_id}>
             <header>
               <h2>{item.title}</h2>
-              <Link to={`/api/articles/${item.topic}`}>#{item.topic}</Link>
+              <Link to={`/articles/${item.topic}`}>#{item.topic}</Link>
             </header>
 
             <div className="body">
