@@ -6,21 +6,34 @@ const Topics = () => {
   let navigate = useNavigate;
   let params = useParams();
   useEffect(() => {
-    fetch(`https://nc-backend-app.herokuapp.com/api/articles`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((newArticles) => {
-        setArticles(
-          newArticles.filter((article) => article.topic === params.topics)
-        );
-      });
+    if (params.topic) {
+      fetch(
+        `https://nc-backend-app.herokuapp.com/api/articles?topic=${params.topic}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((newArticles) => {
+          setArticles(newArticles);
+        });
+      // } else {
+      //   fetch(`https://nc-backend-app.herokuapp.com/api/articles/${params.topic}`)
+      //     .then((response) => {
+      //       return response.json();
+      //     })
+      //     .then((newArticles) => {
+      //       setArticles(
+      //         newArticles.filter((article) => article.topic === params.topics)
+      //       );
+      //     });
+    }
   }, [params.topics]);
 
   return (
     <div>
-      <h1>Topics: {params.topics}</h1>
-      {console.log(params.topics)}
+      <h1>Topic: {params.topic}</h1>
+      {console.log(articles)}
+      <h2>{articles.comment_count}</h2>
       {articles.map((item) => {
         {
           console.log(item, "new new");
