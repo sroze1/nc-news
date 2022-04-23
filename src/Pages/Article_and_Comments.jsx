@@ -32,32 +32,54 @@ const Article_and_Comments = () => {
   return (
     <div>
       <h1>Article {params.article_id} </h1>
-      <div className="body">
-        <div className="article">
-          <p>{article.title}</p>
-          <Link to={`/articles/${article.topic}`}>#{article.topic}</Link>
+
+      <div className="article">
+        <div className="article-header">
+          <div className="article-title">
+            <h2>{article.title}</h2>
+            <h3>
+              <Link to={`/articles/${article.topic}`}>#{article.topic}</Link>
+            </h3>
+          </div>
+
+          <div className="article-info">
+            <p>@{article.author}</p>
+            <p> {article.created_at}</p>
+          </div>
+        </div>
+
+        <div className="article-body">
           <p>{article.body}</p>
-          <p>@{article.author}</p>
-          <p>{article.created_at}</p>
-          <p>{article.votes}</p>
-          <p>END OF ARTICLE REFERENCE FOR ME ONLY TO SPLIT THIS SHIT UP </p>
+        </div>
+
+        <div className="article-footer">
+          <div className="article-button">
+            <p id="votes">Article Votes: {article.votes}</p>
+            <button>Click to upvote</button>
+          </div>
         </div>
       </div>
 
-      <div className="comments">
-        {comments.map((comment) => {
-          return (
-            <div key={comment.comment_id}>
-              {" "}
+      {comments.map((comment) => {
+        return (
+          <div className="comment" key={comment.comment_id}>
+            {" "}
+            <div className="comment-info">
               <p>@{comment.author} commented:</p>
-              <p>{comment.body}</p>
               <p>{comment.created_at}</p>
-              <button id="votes">{comment.votes}</button>
-              <label htmlFor="votes">Upvote dude?</label>
             </div>
-          );
-        })}
-      </div>
+            <div className="comment-body">
+              <p>{comment.body}</p>
+            </div>
+            <div className="comment-footer">
+              <div className="comment-button">
+                <p id="votes">Comment Votes: {comment.votes}</p>
+              </div>
+              <button>Click to upvote</button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

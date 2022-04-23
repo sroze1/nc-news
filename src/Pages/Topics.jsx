@@ -36,22 +36,30 @@ const Topics = () => {
       <h2>{articles.comment_count}</h2>
       {articles.map((item) => {
         return (
-          <div key={articles.article_id}>
-            <header>
-              <h2>{item.title}</h2>
-            </header>
-
-            <div className="body">
-              <p>{item.body}</p>
-              <div>
-                {" "}
-                <p>@{item.author}</p>
+          <div className="article" key={item.article_id}>
+            <div className="article-header" id="topics-header">
+              <h2>
                 <Link to={`/articles/${item.article_id}/article_and_comments`}>
-                  Comments: {item.comment_count}
+                  {item.title}
                 </Link>
-                <button id="votes">{item.votes}</button>
-                <label htmlFor="votes">Click to upvote</label>
+              </h2>
+              <div className="article-info">
+                <p>@{item.author}</p>
                 <p> {item.created_at}</p>
+              </div>
+            </div>
+
+            <div className="article-body">
+              <p>{item.body}</p>
+            </div>
+
+            <div className="article-footer">
+              <Link to={`/articles/${item.article_id}/article_and_comments`}>
+                Comments: {item.comment_count}
+              </Link>
+              <div className="article-button">
+                <p id="votes">Article Votes: {item.votes}</p>
+                <button>Click to upvote</button>
               </div>
             </div>
           </div>
