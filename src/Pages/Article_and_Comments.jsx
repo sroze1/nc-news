@@ -1,43 +1,42 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+import Create from '../Components/Create';
+
 const Article_and_Comments = () => {
   const [article, setArticle] = useState([]);
-  const [comments, setComments] = useState([]);
-  const params = useParams();
+  const [votes, setVotes] = useState(0);
+
+  const { article_id } = useParams();
 
   useEffect(() => {
-    Promise.all([
-      fetch(
-        `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((newArticle, newComments) => {
-          setArticle(newArticle.results);
-        }),
-      fetch(
-        `https://nc-backend-app.herokuapp.com/api/articles/${params.article_id}/comments`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((newComments) => {
-          setComments(newComments.comments);
-        }),
-    ]);
-  }, [params.article_id]);
+    fetch(`https://nc-backend-app.herokuapp.com/api/articles/${article_id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((newArticle) => {
+        setArticle(newArticle.results);
+        setVotes(newArticle.results.votes);
+      });
+  }, [article_id]);
+
+  const increaseVote = () => {
+    setVotes(votes + 1);
+  };
+
+  console.log(article);
 
   return (
     <div>
-      <h1>Article {params.article_id} </h1>
+      <h1>Article {article_id} </h1>
 
       <div className="article">
         <div className="article-header">
+          <h1 className="font-semibold text-lg">Article {article_id} </h1>
           <div className="article-title">
-            <h2>{article.title}</h2>
-            <h3>
+            <h2 className="font-bold text-xl">{article.title}</h2>
+            <h3 className="text-blue-500 hover:scale-110 hover:text-blue-700 duration-300">
               <Link to={`/articles/${article.topic}`}>#{article.topic}</Link>
             </h3>
           </div>
@@ -52,34 +51,22 @@ const Article_and_Comments = () => {
           <p>{article.body}</p>
         </div>
 
-        <div className="article-footer">
+        <div className="article-footer pb-4">
           <div className="article-button">
-            <p id="votes">Article Votes: {article.votes}</p>
-            <button>Click to upvote</button>
+            <p className="" id="votes">
+              Article Votes: {article.votes}
+            </p>
+            <button
+              className="rounded-md bg-red-600 px-4 hover:scale-110 hover:text-white hover:bg-red-400 duration-300"
+              onClick={increaseVote}
+            >
+              Click to upvote
+            </button>
           </div>
         </div>
       </div>
 
-      {comments.map((comment) => {
-        return (
-          <div className="comment" key={comment.comment_id}>
-            {" "}
-            <div className="comment-info">
-              <p>@{comment.author} commented:</p>
-              <p>{comment.created_at}</p>
-            </div>
-            <div className="comment-body">
-              <p>{comment.body}</p>
-            </div>
-            <div className="comment-footer">
-              <div className="comment-button">
-                <p id="votes">Comment Votes: {comment.votes}</p>
-              </div>
-              <button>Click to upvote</button>
-            </div>
-          </div>
-        );
-      })}
+      <Create />
     </div>
   );
 };

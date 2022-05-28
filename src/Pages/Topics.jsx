@@ -1,10 +1,11 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 const Topics = () => {
   const [articles, setArticles] = useState([]);
   let navigate = useNavigate;
   let params = useParams();
+
   useEffect(() => {
     if (params.topic) {
       fetch(
@@ -27,7 +28,7 @@ const Topics = () => {
       //       );
       //     });
     }
-  }, [params.topics]);
+  }, []);
 
   return (
     <div>
@@ -36,9 +37,9 @@ const Topics = () => {
       <h2>{articles.comment_count}</h2>
       {articles.map((item) => {
         return (
-          <div className="article" key={item.article_id}>
+          <div className="article p-4" key={item.article_id}>
             <div className="article-header" id="topics-header">
-              <h2>
+              <h2 className="font-bold underline text-blue-400 text-xl hover:scale-110 hover:text-gray-500 duration-300">
                 <Link to={`/articles/${item.article_id}/article_and_comments`}>
                   {item.title}
                 </Link>

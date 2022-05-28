@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from 'react';
+import { LoginContext } from '../Contexts/LoginContext';
 
 function Login({ Login, error }) {
-  const [details, setDetails] = useState({ email: "", password: "" });
+  const { setUsername, setShowProfile } = useContext(LoginContext);
 
   const submitHandler = (e) => {
     e.prevent.Default();
@@ -11,22 +12,23 @@ function Login({ Login, error }) {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
-        <div className="form-inner">
-          <div className="form-group">
-            <label htmlFor="name">name:</label>
-            <input type="text" name="name" id="name" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="text" name="email" id="email" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input type="text" name="email" id="email" />
-          </div>
-        </div>
-      </form>
+      <input
+        type="text"
+        placeholder="Username.."
+        onChange={(event) => {
+          setUsername(event.target.value);
+        }}
+        name="username"
+        id="username"
+      />
+      <input type="text" placeholder="Password..." name="password" />
+      <button
+        onClick={() => {
+          setShowProfile(true);
+        }}
+      >
+        LOGIN
+      </button>
     </div>
   );
 }
