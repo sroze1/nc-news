@@ -12,6 +12,8 @@ Please Note:
 
 - If you cannot see any information on the page, try and refresh and it should work as it has been tested thoroughly. The requests may sometimes be slow!
 
+Further instructions on how to use this web app can be viewed on the deployed site homepage.
+
 Thank you for your time.
 
 Technologies used: Tailwind CSS towards end of project window + React-icons, ReactJS, SQL for backend
